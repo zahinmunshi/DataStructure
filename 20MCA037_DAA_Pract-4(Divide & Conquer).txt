@@ -1,0 +1,65 @@
+			//ZAHIN MUNSHI
+			//20MCA037
+			//MCA SEM-2
+			//DAA PRACT-4 (Max sub-array)
+#include<stdio.h>
+#include<limits.h>
+
+int maximum(int x, int y)
+{
+    if(x > y)
+    {
+        return x;
+    }
+    else
+    {
+        return y;
+    }
+}
+
+int Max_Sub_Array(int arr[], int low, int high){
+    
+    if(low == high){
+        return arr[low];
+    }
+    
+    int mid= (low + high) /2;
+    int left_max= INT_MIN;
+    int sum=0;
+    
+    for(int i=mid; i>= low; i--){
+        sum += arr[i];
+        
+        if(sum > left_max){
+            left_max=sum;
+        }
+    }
+    
+    int right_max=INT_MIN;
+    sum=0;
+    for(int i= mid + 1; i<= high; i++){
+        sum += arr[i];
+        if(sum> right_max){
+            right_max=sum;
+        }
+        
+    }
+    
+    int max_left_right= maximum(left_max, right_max );
+    
+    return maximum(max_left_right, left_max+right_max);
+}
+
+void main()
+{
+    int arr[]={ -10,20,30,40,50};
+    int size=sizeof(arr)/ sizeof(arr[0]);
+    
+   printf("\nYour data:- \n");
+    for(int i=0; i< size; i++)
+            printf("%d, ",arr[i]);
+
+    printf("\nThe maximum sum of the subarray is =   %d",Max_Sub_Array(arr, 0, size-1));
+    
+    
+}

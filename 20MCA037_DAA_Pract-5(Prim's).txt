@@ -1,0 +1,61 @@
+			//ZAHIN MUNSHI
+			//20MCA037
+			//MCA SEM-2
+			//DAA PRACT-5 (Prim's algo.)
+
+//PRIM'S ALGORITHM FOR FINDING MINIMUM SPANNING TREE
+#include<stdio.h>
+#include<string.h>
+#include<limits.h>
+#include<stdbool.h>
+#define V 5
+
+void main()
+{
+    int G[V][V]={
+        {0, 9, 75, 0, 0},
+        {9, 0, 95, 19, 42},
+        {75, 95, 0, 51, 66},
+        {0, 19, 51, 0, 31},
+        {0, 42, 66, 31, 0}     //This matrix shows the edges between two nodes(> 0)
+    };
+    
+    int no_of_edge=0;
+    int total=0; // calculate total weight
+    int selected[V];  // shows that the given vertex is selected or not
+    
+    memset(selected, false, sizeof(selected)); // It set the memory location of selected with 'false'
+    
+    selected[0]=true;  //Selecting any random starting node
+    
+    printf("\nEDGES : WEIGHT\n");
+    while(no_of_edge < V-1)//MST always have V -1 edges
+    {
+        int min=INT_MAX;
+        int row=0;
+        int cols=0;
+        for(int i=0; i<V; i++)
+        {
+            if(selected[i]) // It shows that we have to explore its neighbour
+            {
+                for(int j=0; j<V; j++)
+                {
+                    if(!selected[j] && G[i][j] > 0)//Here we are checking that vertex are selected or not 
+                    {                            //If not then we can select it and check that there is edge or not
+                        if(min > G[i][j])
+                        {
+                            min=G[i][j];
+                            row=i;
+                            cols=j;
+                        }
+                    }
+                }
+            }
+        }
+        printf("\n%d - %d :  %d",row,cols, min);
+        total += min;
+        selected[cols]=true; //Shows that we have selected this vertex
+        no_of_edge++;
+    }
+     printf("\nTotal weight:- %d",total);
+}

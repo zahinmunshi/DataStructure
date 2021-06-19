@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+void printSubset(int a[],int size)
+{
+int i = 0;
+printf("\n");
+for(i = 0; i<size; i++)
+{
+printf("%d,",a[i]);
+}
+printf("\n");
+
+}
+
+void generateSubsets(int set[], int tuplet[], int s_size, int t_size, int currSum, int ite, int target_sum)
+{
+int i = 0;
+
+if(target_sum == currSum)
+{
+//Another subset is found
+printSubset(tuplet,t_size);
+
+//Move to find another subset
+generateSubsets(set,tuplet,s_size,t_size-1,currSum-set[ite],ite+1,target_sum);
+
+}
+else
+{
+for(i=ite; i<s_size; i++)
+{
+tuplet[t_size] = set[i];
+//go in depth to find subset
+generateSubsets(set,tuplet,s_size,(t_size+1),(currSum+set[i]),(i+1),target_sum);
+}
+}
+}
+
+void subset_sum(int set[], int size, int target_sum)
+{
+int *tuplet_vector = (int *)malloc(size * sizeof(int));
+generateSubsets(set,tuplet_vector,size,0,0,0,target_sum);
+}
+
+void main()
+{
+int set[] = {1,2,3,4,5,1};
+
+subset_sum(set,sizeof(set)/sizeof(set[0]),5);
+}

@@ -1,0 +1,35 @@
+                        //MUNSHI ZAHIN
+                        //20MCA037
+                        //PRACTICAL -8 DAA 
+                        //CHAIN MATRIX MULTIPLICATION
+#include<stdio.h>
+#include<limits.h>
+
+int ChainMatrixMultiplication(int P[], int i, int j);
+
+void main()
+{
+int P[]={5, 4, 6, 2, 7};
+int size= sizeof(P)/sizeof(P[0]);
+printf("\nMinimum multiplication :- %d", ChainMatrixMultiplication(P,1, size-1));
+}
+
+int ChainMatrixMultiplication(int P[], int i, int j)
+{
+    if (i==j){
+        return 0;
+    }
+    int k;
+    int min= INT_MAX;
+    int count;
+
+    for(k=i; k<j; k++){
+            count = ChainMatrixMultiplication(P, i, k) + ChainMatrixMultiplication(P, (k+1), j) + (P[i-1]*P[k]*P[j]);
+
+        if(count < min){
+            min=count;
+        }
+    }
+    return min;
+}
+

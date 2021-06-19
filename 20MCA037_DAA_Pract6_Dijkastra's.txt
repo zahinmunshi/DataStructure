@@ -1,0 +1,98 @@
+            // By:- Munshi Zahin
+            //Roll:- 20MCA037
+//6. (i) Write a program to implement shortest path problem using Dijkstra’s algorithm.
+
+#include <stdio.h>
+#define INFINITY 9999
+#define N 5
+
+
+void Dijkstra(int Graph[N][N], int start)
+{
+    int cost[N][N], distance[N], pred[N], visited[N], mindistance;
+    int i,j,count, nextnode;
+    
+    for(i=0; i<N; i++)
+    {
+        for(j=0; j<N; j++)
+        {
+            if(Graph[i][j] == 0)
+            {
+                cost[i][j]= INFINITY;
+            }
+            else
+            {
+                cost[i][j]= Graph[i][j];
+            }
+        }
+    }
+    
+    //Relaxing neighbour vertex
+    for(i=0; i<N; i++)
+    {
+        distance[i] = cost[start][i];
+        pred[i] = start;
+        visited[i]=0;
+    }
+    
+    visited[start]=1;
+    distance[start]=0;
+    count=1;
+    
+    
+    while(count < N-1)
+    {
+        mindistance = INFINITY;
+        for(i=0; i<N; i++)
+        {
+            if(distance[i] < mindistance && !visited[i])
+            {
+                mindistance =distance[i];
+                nextnode=i;
+            }
+        }
+        
+        visited[nextnode]=1;
+        for(i=0; i<N; i++)
+        {
+            if(!visited[i])
+            {
+                if(mindistance + cost[nextnode][i] < distance[i])
+                {
+                    distance[i] = mindistance + cost[nextnode][i];
+                    pred[i]=nextnode;
+                }
+            }
+        }
+        count++;
+    }
+    
+    printf("\nShortest path from source to destination node using Dijkastra's algorithm:");
+    for(i=0; i<N; i++)
+    {
+        if (i != start)
+        {
+            printf("\n\t%d to %d = %d",pred[i]+1, i+1, distance[i]);
+        }
+    }
+    
+}
+
+int main() {
+  int  i, j, start;
+
+  int Graph[N][N] ={
+     //a  b  c  d  e
+      {0, 3, 8, 5, 0},//a
+      {2, 0, 1, 0, 0},//b
+      {0, 0, 0, 4, 0},//c
+      {0, 0, 5, 0, 0},//d
+      {2, 7, 0, 0, 0} //e
+      
+  };
+  
+  start = 4;
+  Dijkstra(Graph, start);
+
+  return 0;
+}

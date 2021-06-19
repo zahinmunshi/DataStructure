@@ -1,0 +1,19 @@
+		20MCA037
+		MUNSHI ZAHIN
+		DAA:- PRACT-1
+
+Time taken by the CPU  :-  (end_t - start_t) / CLOCKS_PER_SEC
+Processor using :-  	       AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx     2.10 GHz
+Run on :-  		       Online gdb_c_compiler
+
+		Elements Size:- 5000
+			Best Case		Average Case 	Worst Case
+Bubble Sort(Iterative)		0.045869		0.079661		0.117952
+Bubble Sort(Recursive)	0.001056		0.026993		0.120969
+
+
+Insertion Sort(Iterative)	0.001168		0.032534		0.058789
+Insertion Sort(Recursive)	0.001378		0.033255		0.059260
+
+Selection Sort(Iterative)	0.045940		0.069046		0.044166
+Selection Sort(Recursive)	0.060282		0.047416		0.053491
